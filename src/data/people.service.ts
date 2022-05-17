@@ -10,7 +10,7 @@ type PersonDTO = {
    * ISOString
    */
   edited: string;
-  planetId: string;
+  homeworld: number;
   mass: number | null;
 };
 
@@ -19,6 +19,17 @@ export type Person = Omit<PersonDTO, "created" | "edited"> & {
   edited: Date;
 };
 
+/**
+ * Mutates the DTO!
+ */
+const personFromDTO = (dto: PersonDTO): Person =>
+  Object.assign(dto, {
+    created: new Date(dto.created),
+    edited: new Date(dto.edited),
+  });
+
 // TODO utilize env
 export const getAllPeople = (): Promise<PersonDTO[]> =>
-  fetch("localhost:8080/people").then((res) => res.json());
+  fetch("http://localhost:8080/people")
+    .then((res) => res.json())
+    .then((dtos) => dtos.map(personFromDTO));
