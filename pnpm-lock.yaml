@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@vitejs/plugin-vue': ^2.3.3
   cross-fetch: ^3.1.5
+  prettier: ^2.6.2
   superstruct: ^0.15.4
   typescript: ^4.5.4
   vite: ^2.9.9
@@ -11,12 +12,13 @@ specifiers:
   vue-tsc: ^0.34.7
 
 dependencies:
-  superstruct: 0.15.4
   vue: 3.2.33
 
 devDependencies:
   '@vitejs/plugin-vue': 2.3.3_vite@2.9.9+vue@3.2.33
   cross-fetch: 3.1.5
+  prettier: 2.6.2
+  superstruct: 0.15.4
   typescript: 4.6.4
   vite: 2.9.9
   vitest: 0.12.6
@@ -488,6 +490,12 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
+  /prettier/2.6.2:
+    resolution: {integrity: sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
   /resolve/1.22.0:
     resolution: {integrity: sha512-Hhtrw0nLeSrFQ7phPp4OOcVjLPIeMnRlr5mcnVuMe7M/7eBn98A3hmFRLoFo3DLZkivSYwhRUJTyPyWAk56WLw==}
     hasBin: true
@@ -518,7 +526,7 @@ packages:
 
   /superstruct/0.15.4:
     resolution: {integrity: sha512-eOoMeSbP9ZJChNOm/9RYjE+F36rYR966AAqeG3xhQB02j2sfAUXDp4EQ/7bAOqnlJnuFDB8yvOu50SocvKpUEw==}
-    dev: false
+    dev: true
 
   /supports-preserve-symlinks-flag/1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
