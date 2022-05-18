@@ -1,23 +1,25 @@
-import { assert, number, object, string } from "superstruct"
-import { describe, expect, test } from "vitest"
+import { expect, test, vi } from "vitest"
+import { assert, nullable, number, object, string } from "superstruct"
+
+// polyfills
+import { MockStorage } from "./utils.test"
 import "cross-fetch/polyfill"
+vi.stubGlobal("localStorage", new MockStorage())
 import { getAllPlanets } from "./planets.service"
 
 const planetSchema = object({
 	id: number(),
 	name: string(),
-	diameter: number(),
+	diameter: nullable(number()),
 	climate: string(),
-	population: number(),
+	population: nullable(number()),
 })
 
-describe("adasd", () => {
-	// NOTE: API is not currently mocked. neither is fetch
-	test("Service returns a non-empty list of the correct type", async () => {
-		const planets = await getAllPlanets()
+// NOTE: API is not currently mocked. neither is fetch
+test("PlanetsService returns a non-empty list of the correct type", async () => {
+	const planets = await getAllPlanets()
 
-		expect(planets).toBeInstanceOf(Array)
-		expect(planets.length).toBeGreaterThan(0)
-		planets.forEach(planet => assert(planet, planetSchema))
-	})
+	expect(planets).toBeInstanceOf(Array)
+	expect(planets.length).toBeGreaterThan(0)
+	planets.forEach(planet => assert(planet, planetSchema))
 })

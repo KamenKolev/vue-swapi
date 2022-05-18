@@ -1,5 +1,10 @@
 import { assert, date, nullable, number, object, string } from "superstruct"
-import { expect, test } from "vitest"
+import { expect, test, vi } from "vitest"
+
+// polyfills
+import { MockStorage } from "./utils.test"
+import "cross-fetch/polyfill"
+vi.stubGlobal("localStorage", new MockStorage())
 import "cross-fetch/polyfill"
 import { getAllPeople } from "./people.service"
 
@@ -7,14 +12,14 @@ const personSchema = object({
 	id: number(),
 	mass: nullable(number()),
 	name: string(),
-	height: number(),
+	height: nullable(number()),
 	created: date(),
 	edited: date(),
 	homeworld: number(),
 })
 
 // NOTE: API is not currently mocked. neither is fetch
-test("Service returns a non-empty list of the correct type", async () => {
+test("People Service returns a non-empty list of the correct type", async () => {
 	const people = await getAllPeople()
 
 	expect(people).toBeInstanceOf(Array)

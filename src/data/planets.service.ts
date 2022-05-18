@@ -1,3 +1,5 @@
+import { cacheJsonRequest } from "./utils"
+
 type PlanetDTO = {
 	id: number
 	name: string
@@ -9,5 +11,7 @@ type PlanetDTO = {
 export type Planet = PlanetDTO
 
 // TODO utilize env
-export const getAllPlanets = (): Promise<Planet[]> =>
+const fetchAllPlanets = (): Promise<Planet[]> =>
 	fetch("http://localhost:8080/planets").then(res => res.json())
+
+export const getAllPlanets = cacheJsonRequest()("planets")(fetchAllPlanets)

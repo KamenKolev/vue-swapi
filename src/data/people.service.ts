@@ -1,3 +1,5 @@
+import { cacheJsonRequest } from "./utils"
+
 type PersonDTO = {
 	id: number
 	name: string
@@ -29,7 +31,9 @@ const personFromDTO = (dto: PersonDTO): Person =>
 	})
 
 // TODO utilize env
-export const getAllPeople = (): Promise<PersonDTO[]> =>
+const fetchAllPeople = (): Promise<Person[]> =>
 	fetch("http://localhost:8080/people")
 		.then(res => res.json())
-		.then(dtos => dtos.map(personFromDTO))
+		.then((dtos: PersonDTO[]) => dtos.map(dto => personFromDTO(dto)))
+
+export const getAllPeople = cacheJsonRequest()("people")(fetchAllPeople)
