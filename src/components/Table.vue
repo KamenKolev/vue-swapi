@@ -4,9 +4,21 @@ import { computed, ref, VNode } from "vue"
 export type sortingFn<T> = (a: T, b: T) => number
 
 export type ColumnDefinition<T extends object = any> = {
-	getValue: (entity: T) => string | VNode
 	label: string
 	sortingFn?: sortingFn<T>
+} & (
+	| {
+			getValue: (entity: T) => string
+			slot?: undefined // makes life easier afterwards
+	  }
+	| {
+			getValue?: undefined
+			slot: string
+	  }
+)
+
+export type TableSlotData<T> = {
+	item: T
 }
 
 /**
@@ -51,9 +63,9 @@ defineProps<TableProps>()
 			<tr>
 				<th v-for="col of columns" @click="() => sortByCol(col)">
 					<span>{{ col.label }}</span>
-					<span v-if="col.sorting">{{
+					<!-- <span v-if="col.sorting">{{
 						col.sorting === "ASC" ? "ASC" : "DESC"
-					}}</span>
+					}}</span> -->
 				</th>
 			</tr>
 		</thead>
@@ -62,12 +74,14 @@ defineProps<TableProps>()
 				<td
 					v-for="col in columns"
 					:key="
-						typeof col.getValue(value) === 'string'
+						typeof col.getValue?.(value) === 'string'
 							? col.getValue(value) as string
 							: undefined
 					"
 				>
-					{{ col.getValue(value) }}
+					{{ col.getValue?.(value) }}
+
+					<slot v-if="col && col.slot" :name="col.slot" :item="value"> </slot>
 				</td>
 			</tr>
 		</tbody>
@@ -81,7 +95,9 @@ defineProps<TableProps>()
 tr {
 	height: 40px;
 	display: grid;
-	grid-template-columns: auto 80px 80px 120px 120px;
+	/* Issue -> styling per row is duuumb */
+	grid-auto-flow: column;
+	grid-auto-columns: 1fr;
 }
 td,
 th {

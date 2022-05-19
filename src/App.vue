@@ -3,8 +3,9 @@ import { computed, h, onMounted, ref } from "vue"
 import { getAllPlanets, Planet } from "./data/planets.service"
 import Table, { ColumnDefinition, TableProps } from "./components/Table.vue"
 // import Table from "./components/Table.tsx"
-
-import { getAllPeople, Person } from "./data/people.service"
+import type { TableSlotData } from "./components/Table.vue"
+import { getAllPeople } from "./data/people.service"
+import type { Person } from "./data/people.service"
 
 const planets = ref<undefined | Planet[]>(undefined)
 const people = ref<undefined | Person[]>(undefined)
@@ -22,30 +23,25 @@ const tableProps = computed<TableProps>(() => {
 	)
 
 	const colDefs: ColumnDefinition<Person>[] = [
-		{ getValue: ({ name }) => name, label: "Name", sorting: null },
+		{ getValue: ({ name }) => name, label: "Name" },
 		{
 			getValue: ({ height }) => String(height),
 			label: "Height",
-			sorting: null,
 		},
-		{ getValue: ({ mass }) => String(mass), label: "Mass", sorting: null },
+		{ getValue: ({ mass }) => String(mass), label: "Mass" },
 		{
 			getValue: ({ created }) =>
 				new Intl.DateTimeFormat("en-gb").format(new Date(created)),
 			label: "Created",
-			sorting: null,
 		},
 		{
 			getValue: ({ edited }) =>
 				new Intl.DateTimeFormat("en-gb").format(new Date(edited)),
 			label: "Edited",
-			sorting: null,
 		},
-		// TODO
 		{
-			getValue: ({ homeworld }) => h("div", `HELLO HOMEWORLD! ${homeworld}`),
+			slot: "homeworld",
 			label: "homeworld",
-			sorting: null,
 		},
 	]
 	return {
@@ -68,14 +64,8 @@ const tableProps = computed<TableProps>(() => {
 			:key="'id'"
 		>
 			<!-- <template v-slot:item.homeworld="{ item }"> -->
-			<template v-slot:last="{ item }">
-				<!-- <v-chip
-        :color="getColor(item.homeworld)"
-        dark
-      >
-        {{ item.calories }}
-      </v-chip> -->
-				<span> HOMEWORLD {item.homeworld} </span>
+			<template #homeworld="{ item }: TableSlotData<Person>">
+				<span> HOMEWORLD {{ item.homeworld }} </span>
 			</template>
 		</Table>
 	</main>
