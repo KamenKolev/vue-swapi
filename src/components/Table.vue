@@ -4,14 +4,14 @@ export type ColumnDefinition<T extends object = any> = {
 	label: string
 	sorting: "ASC" | "DESC" | null
 }
-// type keyType = JSX.IntrinsicAttributes["key"]
 
-// TODO find out how to elegantly create generic components
+/**
+ * Use this in order to properly type the component
+ */
 export type TableProps<
 	T extends Record<string, unknown> = Record<keyof string, any>,
 > = {
 	values: ReadonlyArray<T>
-	// key?: keyof T // default is .id
 	key?: any // default is .id
 	columns: ReadonlyArray<ColumnDefinition<T>>
 }

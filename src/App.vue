@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue"
 import { getAllPlanets, Planet } from "./data/planets.service"
-import Table, { ColumnDefinition } from "./components/Table.vue"
+import Table, { ColumnDefinition, TableProps } from "./components/Table.vue"
 // import Table from "./components/Table.tsx"
 
 import { getAllPeople, Person } from "./data/people.service"
@@ -15,24 +15,40 @@ onMounted(() => {
 })
 
 const searchString = ref("")
-const filteredPeople = computed(() =>
-	people.value?.filter(person =>
-		person.name.toLowerCase().includes(searchString.value.trim().toLowerCase()),
-	),
-)
-const columns = computed(() => {
-	const firstPerson = filteredPeople.value?.[0]
 
-	if (firstPerson) {
-		return Object.keys(firstPerson).map((k): ColumnDefinition => {
-			return {
-				getValue: o => o[k],
-				label: k[0].toUpperCase() + k.slice(1),
-				sorting: null,
-			}
-		})
+const tableProps = computed<TableProps>(() => {
+	const filteredPeople = people.value?.filter(person =>
+		person.name.toLowerCase().includes(searchString.value.trim().toLowerCase()),
+	)
+
+	const colDefs: ColumnDefinition<Person>[] = [
+		{ getValue: ({ name }) => name, label: "Name", sorting: null },
+		{
+			getValue: ({ height }) => String(height),
+			label: "Height",
+			sorting: null,
+		},
+		{ getValue: ({ mass }) => String(mass), label: "Mass", sorting: null },
+		{
+			getValue: ({ created }) =>
+				new Intl.DateTimeFormat("en-gb").format(new Date(created)),
+			label: "Created",
+			sorting: null,
+		},
+		{
+			getValue: ({ edited }) =>
+				new Intl.DateTimeFormat("en-gb").format(new Date(edited)),
+			label: "Edited",
+			sorting: null,
+		},
+		// TODO
+		// { getValue: ({ homeworld }) => homeworld, label: "homeworld", sorting: null },
+	]
+	return {
+		values: filteredPeople,
+		columns: colDefs,
+		key: "id",
 	}
-	return []
 })
 </script>
 
@@ -40,9 +56,9 @@ const columns = computed(() => {
 	<input type="text" v-model="searchString" />
 	<!-- @ts-ignore -->
 	<Table
-		v-if="filteredPeople"
-		:values="filteredPeople"
-		:columns="columns"
+		v-if="tableProps.values"
+		:values="tableProps.values"
+		:columns="tableProps.columns"
 		:key="'id'"
 	/>
 </template>
