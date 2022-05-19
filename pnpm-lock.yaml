@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@headlessui/vue': ^1.6.1
   '@vitejs/plugin-vue': ^2.3.3
   autoprefixer: ^10.4.7
   cross-fetch: ^3.1.5
@@ -8,6 +9,7 @@ specifiers:
   prettier: ^2.6.2
   superstruct: ^0.15.4
   tailwindcss: ^3.0.24
+  ts-toolbelt: ^9.6.0
   typescript: ^4.5.4
   vite: ^2.9.9
   vitest: ^0.12.6
@@ -15,6 +17,8 @@ specifiers:
   vue-tsc: ^0.34.7
 
 dependencies:
+  '@headlessui/vue': 1.6.1_vue@3.2.33
+  ts-toolbelt: 9.6.0
   vue: 3.2.33
 
 devDependencies:
@@ -36,6 +40,15 @@ packages:
     resolution: {integrity: sha512-FLzHmN9V3AJIrWfOpvRlZCeVg/WLdicSnTMsLur6uDj9TT8ymUlG9XxURdW/XvuygK+2CW0poOJABdA4m/YKxA==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+
+  /@headlessui/vue/1.6.1_vue@3.2.33:
+    resolution: {integrity: sha512-fccGN1hsFvS0P73NplZoOdX1rhyaH5jIQE9IUKNaaJC72mQjR3lVvZldo+iiLF5X1bqgl6pDixWdqS2kMGfFxA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.2.33
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -934,6 +947,10 @@ packages:
   /tr46/0.0.3:
     resolution: {integrity: sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=}
     dev: true
+
+  /ts-toolbelt/9.6.0:
+    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
+    dev: false
 
   /type-detect/4.0.8:
     resolution: {integrity: sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==}
