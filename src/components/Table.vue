@@ -35,7 +35,7 @@ defineProps<TableProps>()
 		</thead>
 		<tbody>
 			<tr v-for="value in values" :key="value?.[(key as any)]">
-				<td v-for="col in columns" :key="value[col.key]">
+				<td v-for="col in columns" :key="col.getValue(value)">
 					{{ col.getValue(value) }}
 				</td>
 			</tr>
