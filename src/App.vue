@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue"
+import { computed, h, onMounted, ref } from "vue"
 import { getAllPlanets, Planet } from "./data/planets.service"
 import Table, { ColumnDefinition, TableProps } from "./components/Table.vue"
 // import Table from "./components/Table.tsx"
@@ -42,7 +42,11 @@ const tableProps = computed<TableProps>(() => {
 			sorting: null,
 		},
 		// TODO
-		// { getValue: ({ homeworld }) => homeworld, label: "homeworld", sorting: null },
+		{
+			getValue: ({ homeworld }) => h("div", `HELLO HOMEWORLD! ${homeworld}`),
+			label: "homeworld",
+			sorting: null,
+		},
 	]
 	return {
 		values: filteredPeople,
@@ -53,17 +57,31 @@ const tableProps = computed<TableProps>(() => {
 </script>
 
 <template>
-	<input type="text" v-model="searchString" />
-	<!-- @ts-ignore -->
-	<Table
-		v-if="tableProps.values"
-		:values="tableProps.values"
-		:columns="tableProps.columns"
-		:key="'id'"
-	/>
+	<main>
+		<input type="text" v-model="searchString" />
+		<!-- @ts-ignore -->
+		<Table
+			class="table"
+			v-if="tableProps.values"
+			:values="tableProps.values"
+			:columns="tableProps.columns"
+			:key="'id'"
+		>
+			<!-- <template v-slot:item.homeworld="{ item }"> -->
+			<template v-slot:last="{ item }">
+				<!-- <v-chip
+        :color="getColor(item.homeworld)"
+        dark
+      >
+        {{ item.calories }}
+      </v-chip> -->
+				<span> HOMEWORLD {item.homeworld} </span>
+			</template>
+		</Table>
+	</main>
 </template>
 
-<style>
+<style scoped>
 /* #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -72,4 +90,25 @@ const tableProps = computed<TableProps>(() => {
 	color: #2c3e50;
 	margin-top: 60px;
 } */
+
+input {
+	border: 1px solid black;
+	border-radius: 2px;
+}
+
+main {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	padding: 2rem;
+	display: grid;
+
+	/* display: flex;
+	flex-direction: column;
+	align-items: center; */
+}
+
+.table {
+	max-width: 1000px;
+}
 </style>
