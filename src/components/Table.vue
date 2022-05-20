@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { computed, ref, VNode } from "vue"
-
-export type sortingFn<T> = (a: T, b: T) => number
+import {
+	sortingDirection,
+	toggleSortingDirection,
+	getInvertedSortingFn,
+} from "../utils/sort"
+import type { sortingFn } from "../utils/sort"
 
 export type ColumnDefinition<T extends object = any> = {
 	label: string
@@ -28,33 +32,35 @@ export type TableProps<
 	T extends Record<string, unknown> = Record<keyof string, any>,
 > = {
 	values: ReadonlyArray<T>
-	key?: any // default is .id
+	idKey?: any // default is .id
 	columns: ReadonlyArray<ColumnDefinition<T>>
 }
 
-const toTableSortingFn =
-	<T>(fn: sortingFn<T>) =>
-	(direction: "ASC" | "DESC"): sortingFn<T> =>
-	(a: T, b: T) => {
-		const result = fn(a, b)
-		if (direction === "ASC") return result
-		return -result
-	}
+const props = defineProps<TableProps>()
 
-// sorting: "ASC" | "DESC" | null
-const sortingFns = ref<Array<sortingFn<any>>>()
-const finalSortingFn = computed(() => {
-	;(a: any, b: any) => {
-		const usedSortFunction = sortingFns.value?.find(fn => fn(a, b) !== 0)
-		return
-	}
-})
+const sortDirection = ref<sortingDirection>(null)
+const sortFn = ref<sortingFn>(() => 0)
 
 function sortByCol(col: ColumnDefinition) {
-	// TODO
+	if (sortFn.value === col.sortingFn) {
+		sortDirection.value = toggleSortingDirection(sortDirection.value)
+	} else {
+		sortDirection.value = "ASC"
+		sortFn.value = col.sortingFn ? col.sortingFn : () => 0
+	}
 }
+const sortedValues = computed(() => {
+	switch (sortDirection.value) {
+		case "ASC":
+			return [...props.values].sort(sortFn.value)
 
-defineProps<TableProps>()
+		case "DESC":
+			return [...props.values].sort(getInvertedSortingFn(sortFn.value))
+
+		case null:
+			return props.values
+	}
+})
 </script>
 
 <template>
@@ -63,14 +69,12 @@ defineProps<TableProps>()
 			<tr>
 				<th v-for="col of columns" @click="() => sortByCol(col)">
 					<span>{{ col.label }}</span>
-					<!-- <span v-if="col.sorting">{{
-						col.sorting === "ASC" ? "ASC" : "DESC"
-					}}</span> -->
+					<span v-if="sortFn === col.sortingFn">{{ sortDirection }}</span>
 				</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr v-for="value in values" :key="value?.[(key as any)]">
+			<tr v-for="value in sortedValues" :key="value?.[(idKey as any)]">
 				<td
 					v-for="col in columns"
 					:key="

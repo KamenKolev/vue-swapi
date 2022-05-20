@@ -9,13 +9,16 @@ export type JsonCacheStorage = Pick<
 export const cacheJsonRequest =
 	(storage: JsonCacheStorage = localStorage) =>
 	(localStorageKey: string) =>
-	<T>(requestFn: () => Promise<T>) =>
+	<T>(
+		requestFn: () => Promise<T>,
+		reviver?: (key: string | number, value: unknown) => any,
+	) =>
 	async () => {
 		const cached = storage.getItem(localStorageKey)
 
 		if (cached) {
 			try {
-				return JSON.parse(cached) as T
+				return JSON.parse(cached, reviver) as T
 			} catch {
 				storage.removeItem(localStorageKey)
 			}

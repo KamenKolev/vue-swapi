@@ -36,4 +36,12 @@ const fetchAllPeople = (): Promise<Person[]> =>
 		.then(res => res.json())
 		.then((dtos: PersonDTO[]) => dtos.map(dto => personFromDTO(dto)))
 
-export const getAllPeople = cacheJsonRequest()("people")(fetchAllPeople)
+export const getAllPeople = cacheJsonRequest()("people")(
+	fetchAllPeople,
+	(k, v) => {
+		if (k === "created" || k === "edited") {
+			return new Date(v as any)
+		}
+		return v
+	},
+)
