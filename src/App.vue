@@ -23,66 +23,16 @@ const filteredPeople = computed(() =>
 </script>
 
 <template>
-	<main class="bg-white text-black dark:bg-black dark:text-white">
+	<main
+		class="relative flex h-screen w-screen flex-col justify-items-center gap-4 overflow-hidden bg-white p-4 text-black dark:bg-black dark:text-white"
+	>
 		<input
 			type="text"
 			v-model="searchString"
-			class="w-64 border border-inherit bg-inherit p-4 text-inherit"
+			class="w-64 border border-inherit bg-inherit p-2 text-inherit"
 			placeholder="Fitler by name"
 		/>
 
 		<PersonTable :planets="planets ?? []" :people="filteredPeople ?? []" />
 	</main>
 </template>
-
-<style scoped>
-main {
-	width: 100vw;
-	height: 100vh;
-	overflow: hidden;
-	padding: 1rem;
-	display: grid;
-	/* TODO revisit */
-	grid-template-areas:
-		"input"
-		"table";
-	grid-template-rows: 40px 1fr;
-	grid-template-columns: 1fr;
-	gap: 1rem;
-	position: relative;
-	justify-items: center;
-}
-
-button {
-	text-align: start;
-}
-
-input {
-	grid-area: input;
-}
-
-.table {
-	grid-area: table;
-	overflow: auto;
-	display: block;
-	display: flex;
-	flex-direction: column;
-}
-
-button {
-	/* TODO */
-	/* height: 32px;
-	width: 32px; */
-
-	/* makes corners non-clickable */
-	/* border-radius: 50%; */
-	/* overflow: hidden; */
-}
-
-.planetIcon {
-	object-fit: contain;
-	max-height: 100%;
-	max-width: 100%;
-	display: block;
-}
-</style>

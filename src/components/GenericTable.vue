@@ -84,14 +84,16 @@ const sortedValues = computed(() => {
 </script>
 
 <template>
-	<table class="custom-scrollbar">
+	<table
+		class="custom-scrollbar block w-full max-w-max overflow-x-auto whitespace-nowrap"
+	>
 		<thead class="border-b">
 			<tr>
 				<th
 					v-for="col of columns"
 					@click="() => sortByCol(col)"
 					:style="col.styles ?? {}"
-					class="relative select-none bg-gray-100 p-4 pr-12 text-left font-medium hover:bg-gray-200 dark:bg-gray-900 dark:hover:bg-gray-800"
+					class="sticky top-0 select-none bg-gray-100 p-4 pr-12 text-left font-medium hover:bg-gray-200 dark:bg-gray-900 dark:hover:bg-gray-800"
 				>
 					<div class="flex items-center">
 						<span>{{ col.label }}</span>
@@ -149,25 +151,3 @@ const sortedValues = computed(() => {
 		</tbody>
 	</table>
 </template>
-
-<style scoped>
-table {
-	max-width: max-content;
-	width: 100%;
-	display: block;
-	overflow-x: auto;
-	white-space: nowrap;
-}
-
-th {
-	position: sticky;
-	top: 0;
-	vertical-align: bottom;
-}
-
-.th-inner {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-</style>
