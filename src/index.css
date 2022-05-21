@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+	box-sizing: border-box;
+}
+
+/* For Chrome, EDGE, Opera, Others */
+.custom-scrollbar::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+	.custom-scrollbar::-webkit-scrollbar-track {
+		background: black;
+	}
+
+	.custom-scrollbar::-webkit-scrollbar-thumb {
+		background: currentColor;
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	.custom-scrollbar::-webkit-scrollbar-track {
+		background: white;
+	}
+
+	.custom-scrollbar::-webkit-scrollbar-thumb {
+		background: currentColor;
+	}
+}

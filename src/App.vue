@@ -23,12 +23,12 @@ const filteredPeople = computed(() =>
 </script>
 
 <template>
-	<main>
+	<main class="bg-white dark:bg-black text-black dark:text-white">
 		<input
 			type="text"
 			v-model="searchString"
+			class="w-64 p-4 bg-inherit text-inherit border-inherit border"
 			placeholder="Fitler by name"
-			class="w-64 p-4 border text-gray-800 border-gray-200 bg-white"
 		/>
 
 		<PersonTable :planets="planets ?? []" :people="filteredPeople ?? []" />
