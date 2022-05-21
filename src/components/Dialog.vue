@@ -22,7 +22,7 @@ onKeyDown(
 	<dialog
 		:open="open"
 		ref="dialogElement"
-		class="pointer-events-auto top-1/3 w-full max-w-max rounded-md border-none bg-white bg-clip-padding p-4 text-current shadow-lg outline-none dark:border dark:border-white dark:bg-black"
+		class="pointer-events-auto top-1/3 w-full max-w-max border-none bg-white bg-clip-padding p-4 text-current shadow-lg outline-none dark:border dark:border-solid dark:border-white dark:bg-black"
 	>
 		<button
 			type="button"
@@ -31,7 +31,7 @@ onKeyDown(
 		>
 			<XIcon class="h-6 w-6" />
 		</button>
-		<div class="rounded-2xl bg-white dark:bg-black">
+		<div class="bg-white dark:bg-black">
 			<slot />
 		</div>
 	</dialog>
