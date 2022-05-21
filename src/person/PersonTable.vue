@@ -105,7 +105,7 @@ function handlePlanetClick(planetId: Person["homeworld"]) {
 				<button
 					type="button"
 					@click="handlePlanetClick(item.homeworld)"
-					class="px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-900 dark:hover:bg-gray-800"
+					class="bg-gray-100 px-4 py-2 hover:bg-gray-200 dark:bg-gray-900 dark:hover:bg-gray-800"
 				>
 					{{ planets?.find(planet => planet.id === item.homeworld)?.name }}
 				</button>

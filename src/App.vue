@@ -23,11 +23,11 @@ const filteredPeople = computed(() =>
 </script>
 
 <template>
-	<main class="bg-white dark:bg-black text-black dark:text-white">
+	<main class="bg-white text-black dark:bg-black dark:text-white">
 		<input
 			type="text"
 			v-model="searchString"
-			class="w-64 p-4 bg-inherit text-inherit border-inherit border"
+			class="w-64 border border-inherit bg-inherit p-4 text-inherit"
 			placeholder="Fitler by name"
 		/>
 
