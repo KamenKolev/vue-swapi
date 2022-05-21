@@ -93,7 +93,7 @@ const sortedValues = computed(() => {
 					v-for="col of columns"
 					@click="() => sortByCol(col)"
 					:style="col.styles ?? {}"
-					class="sticky top-0 select-none bg-gray-100 p-4 pr-12 text-left font-medium hover:bg-gray-200 dark:bg-gray-900 dark:hover:bg-gray-800"
+					class="sticky top-0 z-10 select-none bg-gray-100 p-4 pr-12 text-left font-medium hover:bg-gray-200 dark:bg-gray-900 dark:hover:bg-gray-800"
 				>
 					<div class="flex items-center">
 						<span>{{ col.label }}</span>

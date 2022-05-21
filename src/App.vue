@@ -24,7 +24,7 @@ const filteredPeople = computed(() =>
 
 <template>
 	<main
-		class="relative flex h-screen w-screen flex-col justify-items-center gap-4 overflow-hidden bg-white p-4 text-black dark:bg-black dark:text-white"
+		class="relative flex h-screen w-screen flex-col items-center justify-items-center gap-4 overflow-hidden bg-white p-4 text-black dark:bg-black dark:text-white"
 	>
 		<input
 			type="text"
