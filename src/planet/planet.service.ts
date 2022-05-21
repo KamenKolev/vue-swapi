@@ -5,6 +5,6 @@ type PlanetDTO = Planet
 
 // TODO utilize env
 const fetchAllPlanets = (): Promise<PlanetDTO[]> =>
-	fetch("https://go-swapi.fly.dev/planets").then(res => res.json())
+	fetch(`${import.meta.env.VITE_API_URL}planets`).then(res => res.json())
 
 export const getAllPlanets = cacheJsonRequest()("planets")(fetchAllPlanets)

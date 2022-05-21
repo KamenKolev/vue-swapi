@@ -36,9 +36,7 @@ export type TableSlotData<T> = {
 /**
  * Use this in order to properly type the component
  */
-export type TableProps<
-	T extends Record<string, unknown> = Record<keyof string, any>,
-> = {
+export type TableProps<T extends Record<string, unknown> = any> = {
 	values?: ReadonlyArray<T>
 	idKey?: any // default is .id
 	columns: ReadonlyArray<ColumnDefinition<T>>
@@ -72,10 +70,10 @@ function sortByCol(col: ColumnDefinition) {
 const sortedValues = computed(() => {
 	switch (sortDirection.value) {
 		case "ASC":
-			return [...props.values].sort(sortFn.value)
+			return [...(props.values ?? [])].sort(sortFn.value)
 
 		case "DESC":
-			return [...props.values].sort(getInvertedSortingFn(sortFn.value))
+			return [...(props.values ?? [])].sort(getInvertedSortingFn(sortFn.value))
 
 		case null:
 			return props.values

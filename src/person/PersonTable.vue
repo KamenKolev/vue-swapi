@@ -2,6 +2,7 @@
 import { computed, ref } from "vue"
 import type { Planet } from "../planet/planet.type"
 import GenericTable, { ColumnDefinition } from "../components/GenericTable.vue"
+import type { TableSlotData } from "../components/GenericTable.vue"
 import type { Person } from "../person/person.type"
 import PlanetDialog from "../planet/PlanetDialog.vue"
 import { sortByNumber, sortByString, sortWithSelector } from "../utils/sort"
