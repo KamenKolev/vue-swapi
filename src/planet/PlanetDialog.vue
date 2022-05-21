@@ -13,7 +13,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-	<Dialog :open="open">
+	<Dialog :open="open" @close="() => emit('close')">
 		<div class="font-semibold mb-4">{{ planet?.name }}</div>
 		<ul>
 			<li class="my-1">Climate: {{ planet?.climate }}</li>
