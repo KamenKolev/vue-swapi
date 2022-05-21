@@ -1,4 +1,4 @@
-import { JsonCacheStorage } from "./utils"
+import { JsonCacheStorage } from "./cache"
 
 export class MockStorage implements JsonCacheStorage {
 	getItem(key: string): string | null {

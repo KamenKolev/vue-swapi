@@ -1,0 +1,121 @@
+<script setup lang="ts">
+import { computed, onMounted, ref } from "vue"
+import type { Planet } from "../planet/planet.type"
+import GenericTable, {
+	ColumnDefinition,
+	TableProps,
+} from "../components/GenericTable.vue"
+import type { TableSlotData } from "../components/GenericTable.vue"
+import type { Person } from "../person/person.type"
+import PlanetDialog from "../planet/PlanetDialog.vue"
+import { sortByNumber, sortByString, sortWithSelector } from "../utils/sort"
+import { dateFormatter, numberFormatter } from "../utils/formatting"
+
+const colDefs: ColumnDefinition<Person>[] = [
+	{
+		label: "Name",
+		// getValue: ({ name }) => name,
+		slot: "name",
+		sortingFn: sortWithSelector<Person>(({ name }) => name)(sortByString),
+		width: "180px",
+	},
+	{
+		label: "Height (cm)",
+		getValue: ({ height }) =>
+			height ? String(numberFormatter.format(height)) : "-",
+		sortingFn: sortWithSelector<Person>(({ height }) => height ?? -Infinity)(
+			sortByNumber,
+		),
+		width: "120px",
+	},
+	{
+		// TODO prevent null from being displayed
+		label: "Mass (kg)",
+		getValue: ({ mass }) => (mass ? String(numberFormatter.format(mass)) : "-"),
+		sortingFn: sortWithSelector<Person>(({ mass }) => mass ?? -Infinity)(
+			sortByNumber,
+		),
+		width: "100px",
+	},
+	{
+		label: "Created",
+		getValue: ({ created }) => dateFormatter.format(new Date(created)),
+		sortingFn: sortWithSelector<Person>(person => {
+			if (!person.created.getTime) {
+			}
+			return person.created?.getTime()
+		})(sortByNumber),
+		width: "160px",
+	},
+	// TODO check if this really works
+	{
+		label: "Edited",
+		getValue: ({ edited }) => dateFormatter.format(new Date(edited)),
+		sortingFn: sortWithSelector<Person>(({ edited }) => edited?.getTime())(
+			sortByNumber,
+		),
+		width: "160px",
+	},
+	{
+		slot: "homeworld",
+		label: "Planet",
+		width: "140px",
+	},
+]
+
+const props = defineProps<{
+	people: Person[]
+	planets: Planet[]
+}>()
+
+const planetModalIsOpen = ref(false)
+const clickedPlanetId = ref()
+const modalPlanet = computed(() =>
+	// TODO fetch effect
+	props.planets?.find(({ id }) => id === clickedPlanetId.value),
+)
+function handlePlanetClick(planetId: Person["homeworld"]) {
+	clickedPlanetId.value = planetId
+	planetModalIsOpen.value = true
+}
+</script>
+
+<template>
+	<GenericTable
+		class="personTable"
+		:values="(props.people as any)"
+		:columns="(colDefs as any)"
+		idKey="id"
+	>
+		<template #name="{ item }: TableSlotData<Person>">
+			<span class="font-semibold">{{ item.name }}</span>
+		</template>
+
+		<template #homeworld="{ item }: TableSlotData<Person>">
+			<span>
+				<button
+					type="button"
+					@click="handlePlanetClick(item.homeworld)"
+					class="bg-gray-50 hover:bg-gray-100"
+				>
+					<!-- <img
+							class="planetIcon"
+							alt="Planet icon"
+							src="./assets/Death-Star-icon_128.png"
+						/> -->
+					{{ planets?.find(planet => planet.id === item.homeworld)?.name }}
+				</button>
+			</span>
+		</template>
+	</GenericTable>
+
+	<PlanetDialog
+		:open="planetModalIsOpen"
+		:planet="modalPlanet"
+		@close="
+			() => {
+				planetModalIsOpen = false
+			}
+		"
+	/>
+</template>

@@ -1,6 +1,7 @@
-import { cacheJsonRequest } from "./utils"
+import { cacheJsonRequest } from "../utils/cache"
+import { Person } from "./person.type"
 
-type PersonDTO = {
+export type PersonDTO = {
 	id: number
 	name: string
 	height: number
@@ -14,11 +15,6 @@ type PersonDTO = {
 	edited: string
 	homeworld: number
 	mass: number | null
-}
-
-export type Person = Omit<PersonDTO, "created" | "edited"> & {
-	created: Date
-	edited: Date
 }
 
 /**
