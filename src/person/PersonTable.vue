@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue"
+import { computed, ref } from "vue"
 import type { Planet } from "../planet/planet.type"
-import GenericTable, {
-	ColumnDefinition,
-	TableProps,
-} from "../components/GenericTable.vue"
-import type { TableSlotData } from "../components/GenericTable.vue"
+import GenericTable, { ColumnDefinition } from "../components/GenericTable.vue"
 import type { Person } from "../person/person.type"
 import PlanetDialog from "../planet/PlanetDialog.vue"
 import { sortByNumber, sortByString, sortWithSelector } from "../utils/sort"
@@ -17,7 +13,10 @@ const colDefs: ColumnDefinition<Person>[] = [
 		// getValue: ({ name }) => name,
 		slot: "name",
 		sortingFn: sortWithSelector<Person>(({ name }) => name)(sortByString),
-		width: "180px",
+		styles: {
+			minWidth: "185px",
+			maxWidth: "185px",
+		},
 	},
 	{
 		label: "Height (cm)",
@@ -26,17 +25,22 @@ const colDefs: ColumnDefinition<Person>[] = [
 		sortingFn: sortWithSelector<Person>(({ height }) => height ?? -Infinity)(
 			sortByNumber,
 		),
-		width: "120px",
+		styles: {
+			minWidth: "140px",
+			maxWidth: "140px",
+		},
 	},
 	{
-		// TODO prevent null from being displayed
 		label: "Mass (kg)",
 		getValue: ({ mass }) =>
 			mass ? String(numberFormatter.format(mass)) : "unknown",
 		sortingFn: sortWithSelector<Person>(({ mass }) => mass ?? -Infinity)(
 			sortByNumber,
 		),
-		width: "100px",
+		styles: {
+			minWidth: "120px",
+			maxWidth: "120px",
+		},
 	},
 	{
 		label: "Created",
@@ -46,7 +50,10 @@ const colDefs: ColumnDefinition<Person>[] = [
 			}
 			return person.created?.getTime()
 		})(sortByNumber),
-		width: "160px",
+		styles: {
+			minWidth: "160px",
+			maxWidth: "160px",
+		},
 	},
 	// TODO check if this really works
 	{
@@ -55,12 +62,18 @@ const colDefs: ColumnDefinition<Person>[] = [
 		sortingFn: sortWithSelector<Person>(({ edited }) => edited?.getTime())(
 			sortByNumber,
 		),
-		width: "160px",
+		styles: {
+			minWidth: "160px",
+			maxWidth: "160px",
+		},
 	},
 	{
 		slot: "homeworld",
 		label: "Planet",
-		width: "140px",
+		styles: {
+			minWidth: "175px",
+			maxWidth: "175px",
+		},
 		sortingFn: (a, b) => {
 			const planetAName =
 				props.planets.find(planet => planet.id === a.homeworld)?.name ?? ""

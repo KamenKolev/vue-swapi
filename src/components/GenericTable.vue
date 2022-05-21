@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue"
+import { computed, CSSProperties, ref } from "vue"
 import {
 	sortingDirection,
 	toggleSortingDirection,
@@ -15,7 +15,7 @@ import { SortAscendingIcon, SortDescendingIcon } from "@heroicons/vue/solid"
 export type ColumnDefinition<T extends object = any> = {
 	label: string
 	sortingFn?: sortingFn<T>
-	width?: string
+	styles?: CSSProperties
 } & (
 	| {
 			getValue: (entity: T) => string
@@ -90,7 +90,7 @@ const sortedValues = computed(() => {
 				<th
 					v-for="col of columns"
 					@click="() => sortByCol(col)"
-					:style="{ width: col.width }"
+					:style="col.styles ?? {}"
 					class="relative select-none bg-gray-100 p-4 pr-12 text-left font-medium hover:bg-gray-200 dark:bg-gray-900 dark:hover:bg-gray-800"
 				>
 					<div class="flex items-center">
@@ -117,7 +117,7 @@ const sortedValues = computed(() => {
 			<tr v-if="isSkeleton" v-for="skeleton in skeletonRowNumber">
 				<td
 					v-for="col in columns"
-					:style="{ width: col.width, height: '72.8px' }"
+					:style="{ ...(col.styles ?? {}), height: '72.8px' }"
 					class="p-4"
 				>
 					<Skeleton />
@@ -132,7 +132,7 @@ const sortedValues = computed(() => {
 			>
 				<td
 					v-for="col in columns"
-					:style="{ width: col.width }"
+					:style="col.styles"
 					:key="
 						typeof col.getValue?.(value) === 'string'
 							? col.getValue(value) as string
