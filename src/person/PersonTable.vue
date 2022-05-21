@@ -22,7 +22,7 @@ const colDefs: ColumnDefinition<Person>[] = [
 	{
 		label: "Height (cm)",
 		getValue: ({ height }) =>
-			height ? String(numberFormatter.format(height)) : "-",
+			height ? String(numberFormatter.format(height)) : "unknown",
 		sortingFn: sortWithSelector<Person>(({ height }) => height ?? -Infinity)(
 			sortByNumber,
 		),
@@ -31,7 +31,8 @@ const colDefs: ColumnDefinition<Person>[] = [
 	{
 		// TODO prevent null from being displayed
 		label: "Mass (kg)",
-		getValue: ({ mass }) => (mass ? String(numberFormatter.format(mass)) : "-"),
+		getValue: ({ mass }) =>
+			mass ? String(numberFormatter.format(mass)) : "unknown",
 		sortingFn: sortWithSelector<Person>(({ mass }) => mass ?? -Infinity)(
 			sortByNumber,
 		),
@@ -110,7 +111,7 @@ function handlePlanetClick(planetId: Person["homeworld"]) {
 				</button>
 			</span>
 
-			<!-- <template v-else>-</template> -->
+			<template v-else>unknown</template>
 		</template>
 	</GenericTable>
 

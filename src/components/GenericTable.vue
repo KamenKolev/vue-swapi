@@ -65,6 +65,8 @@ function sortByCol(col: ColumnDefinition) {
 	if (tbodyRef.value) {
 		tbodyRef.value.rows[0].scrollIntoView({
 			behavior: "smooth",
+			block: "end",
+			inline: "end",
 		})
 	}
 }
