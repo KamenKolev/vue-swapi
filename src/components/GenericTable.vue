@@ -94,18 +94,20 @@ const sortedValues = computed(() => {
 					:style="{ width: col.width }"
 					class="text-left relative p-4 pr-12 font-medium bg-gray-100 hover:bg-gray-200 select-none"
 				>
-					<span>{{ col.label }}</span>
-					<template v-if="sortFn === col.sortingFn">
-						<!-- {{ sortDirection }} -->
-						<SortAscendingIcon
-							v-if="sortDirection === 'ASC'"
-							class="absolute right-3 inline h-5 w-5"
-						/>
-						<SortDescendingIcon
-							v-else-if="sortDirection === 'DESC'"
-							class="absolute right-3 inline h-5 w-5"
-						/>
-					</template>
+					<div class="flex items-center">
+						<span>{{ col.label }}</span>
+						<template v-if="sortFn === col.sortingFn">
+							<!-- {{ sortDirection }} -->
+							<SortAscendingIcon
+								v-if="sortDirection === 'ASC'"
+								class="absolute right-3 inline h-5 w-5"
+							/>
+							<SortDescendingIcon
+								v-else-if="sortDirection === 'DESC'"
+								class="absolute right-3 inline h-5 w-5"
+							/>
+						</template>
+					</div>
 				</th>
 			</tr>
 		</thead>
