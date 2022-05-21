@@ -65,8 +65,6 @@ function sortByCol(col: ColumnDefinition) {
 	if (tbodyRef.value) {
 		tbodyRef.value.rows[0].scrollIntoView({
 			behavior: "smooth",
-			block: "start",
-			inline: "start",
 		})
 	}
 }
@@ -92,7 +90,7 @@ const sortedValues = computed(() => {
 					v-for="col of columns"
 					@click="() => sortByCol(col)"
 					:style="{ width: col.width }"
-					class="text-left relative p-4 pr-12 font-medium bg-gray-50 hover:bg-gray-100 select-none"
+					class="text-left relative p-4 pr-12 font-medium bg-gray-100 hover:bg-gray-200 select-none"
 				>
 					<span>{{ col.label }}</span>
 					<template v-if="sortFn === col.sortingFn">
@@ -113,7 +111,7 @@ const sortedValues = computed(() => {
 			<tr v-if="isSkeleton" v-for="skeleton in skeletonRowNumber">
 				<td
 					v-for="col in columns"
-					:style="{ width: col.width, height: '56.8px' }"
+					:style="{ width: col.width, height: '72.8px' }"
 					class="p-4"
 				>
 					<Skeleton />

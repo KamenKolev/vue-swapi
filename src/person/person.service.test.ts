@@ -15,7 +15,7 @@ const personSchema = object({
 	height: nullable(number()),
 	created: date(),
 	edited: date(),
-	homeworld: number(),
+	homeworld: nullable(number()),
 })
 
 // NOTE: API is not currently mocked. neither is fetch

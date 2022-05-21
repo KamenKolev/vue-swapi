@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onClickOutside } from "@vueuse/core"
+import { onClickOutside, onKeyDown } from "@vueuse/core"
 import { ref } from "vue"
 
 defineProps<{
@@ -10,7 +10,11 @@ const emit = defineEmits<{
 }>()
 
 const contentEl = ref(null)
-onClickOutside(contentEl, e => emit("close"))
+onClickOutside(contentEl, () => emit("close"))
+onKeyDown(
+	({ key }) => key === "Escape",
+	() => emit("close"),
+)
 </script>
 
 <template>

@@ -4,6 +4,6 @@ export type Person = {
 	height: number
 	created: Date
 	edited: Date
-	homeworld: number
+	homeworld: number | null
 	mass: number | null
 }

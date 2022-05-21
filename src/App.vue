@@ -28,7 +28,7 @@ const filteredPeople = computed(() =>
 			type="text"
 			v-model="searchString"
 			placeholder="Fitler by name"
-			class="w-64 rounded-lg p-4 border text-gray-800 border-gray-200 bg-white"
+			class="w-64 p-4 border text-gray-800 border-gray-200 bg-white"
 		/>
 
 		<PersonTable :planets="planets ?? []" :people="filteredPeople ?? []" />
@@ -48,7 +48,7 @@ main {
 		"table";
 	grid-template-rows: 40px 1fr;
 	grid-template-columns: 1fr;
-	gap: 2rem;
+	gap: 1rem;
 	position: relative;
 	justify-items: center;
 }

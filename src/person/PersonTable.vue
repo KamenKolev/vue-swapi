@@ -60,6 +60,14 @@ const colDefs: ColumnDefinition<Person>[] = [
 		slot: "homeworld",
 		label: "Planet",
 		width: "140px",
+		sortingFn: (a, b) => {
+			const planetAName =
+				props.planets.find(planet => planet.id === a.homeworld)?.name ?? ""
+			const planetBName =
+				props.planets.find(planet => planet.id === b.homeworld)?.name ?? ""
+
+			return sortByString(planetAName, planetBName)
+		},
 	},
 ]
 
@@ -92,20 +100,17 @@ function handlePlanetClick(planetId: Person["homeworld"]) {
 		</template>
 
 		<template #homeworld="{ item }: TableSlotData<Person>">
-			<span>
+			<span v-if="item.homeworld !== null">
 				<button
 					type="button"
 					@click="handlePlanetClick(item.homeworld)"
-					class="bg-gray-50 hover:bg-gray-100"
+					class="px-4 py-2 bg-gray-100 hover:bg-gray-200"
 				>
-					<!-- <img
-							class="planetIcon"
-							alt="Planet icon"
-							src="./assets/Death-Star-icon_128.png"
-						/> -->
 					{{ planets?.find(planet => planet.id === item.homeworld)?.name }}
 				</button>
 			</span>
+
+			<!-- <template v-else>-</template> -->
 		</template>
 	</GenericTable>
 
