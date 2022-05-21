@@ -39,7 +39,7 @@ export type TableSlotData<T> = {
 export type TableProps<
 	T extends Record<string, unknown> = Record<keyof string, any>,
 > = {
-	values: ReadonlyArray<T>
+	values?: ReadonlyArray<T>
 	idKey?: any // default is .id
 	columns: ReadonlyArray<ColumnDefinition<T>>
 }
@@ -50,7 +50,7 @@ const sortDirection = ref<sortingDirection>(null)
 const sortFn = ref<sortingFn>(() => 0)
 const tbodyRef = ref<HTMLTableSectionElement | null>(null)
 
-const isSkeleton = computed(() => !props?.values?.length)
+const isSkeleton = computed(() => props.values === undefined)
 const skeletonRowNumber = 10
 
 function sortByCol(col: ColumnDefinition) {
