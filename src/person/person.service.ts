@@ -28,7 +28,7 @@ const personFromDTO = (dto: PersonDTO): Person =>
 
 // TODO utilize env
 const fetchAllPeople = (): Promise<Person[]> =>
-	fetch("http://localhost:8080/people")
+	fetch("https://go-swapi.fly.dev/people")
 		.then(res => res.json())
 		.then((dtos: PersonDTO[]) => dtos.map(dto => personFromDTO(dto)))
 
