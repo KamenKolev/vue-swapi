@@ -33,8 +33,7 @@ effect(() => {
 </script>
 
 <template>
-  <dialog :open="open" ref="dialogElement" class="w-full max-w-max p-0">
-    <!-- dialog window. -->
+  <dialog ref="dialogElement" class="w-full max-w-max p-0">
     <div
       class="pointer-events-auto border-none bg-white p-8 pt-4 text-black text-current shadow-lg outline-none dark:bg-gray-900 dark:text-white"
       ref="dialogInnerElement"

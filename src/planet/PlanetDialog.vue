@@ -2,14 +2,18 @@
 import { Planet } from "./planet.type"
 import { numberFormatter } from "../utils/formatting"
 import Dialog from "../components/Dialog.vue"
+import { planets } from "../state/planets"
+import { computed } from "vue"
 
-defineProps<{
-  planet?: Planet
+const props = defineProps<{
+  id?: Planet["id"]
   open: boolean
 }>()
 const emit = defineEmits<{
   (event: "close"): void
 }>()
+
+const planet = computed(() => planets.value?.find(({ id }) => id === props.id))
 </script>
 
 <template>

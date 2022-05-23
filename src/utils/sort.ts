@@ -1,8 +1,8 @@
-export type sortingFn<T = any> = (a: T, b: T) => number
-export type sortingDirection = "ASC" | "DESC" | null
+export type SortingFn<T = any> = (a: T, b: T) => number
+export type SortingDirection = "ASC" | "DESC" | null
 export function toggleSortingDirection(
-  prev: sortingDirection,
-): sortingDirection {
+  prev: SortingDirection,
+): SortingDirection {
   switch (prev) {
     case "ASC":
       return "DESC"
@@ -14,7 +14,7 @@ export function toggleSortingDirection(
 }
 
 export const getInvertedSortingFn =
-  <T = any>(fn: sortingFn<T>): sortingFn<T> =>
+  <T = any>(fn: SortingFn<T>): SortingFn<T> =>
   (a, b) =>
     -fn(a, b)
 
@@ -22,6 +22,22 @@ export const sortByString = (a: string, b: string) => a.localeCompare(b)
 export const sortByNumber = (a: number, b: number) => a - b
 export const sortWithSelector =
   <T = any, R = any>(selector: (item: T) => R) =>
-  (sortFn: sortingFn<R>): sortingFn<T> =>
+  (sortFn: SortingFn<R>): SortingFn<T> =>
   (a, b) =>
     sortFn(selector(a), selector(b))
+
+export function getSortingFunction(
+  fn: SortingFn,
+  direction: SortingDirection,
+): SortingFn {
+  switch (direction) {
+    case "ASC":
+      return fn
+
+    case "DESC":
+      return getInvertedSortingFn(fn)
+
+    case null:
+      return () => 0
+  }
+}

@@ -1,5 +1,5 @@
-import { cacheJsonRequest } from "../utils/cache"
 import { Person } from "./person.type"
+import { cacheJsonRequest } from "../utils/cache"
 
 export type PersonDTO = {
   id: number
@@ -13,7 +13,7 @@ export type PersonDTO = {
    * ISOString
    */
   edited: string
-  homeworld: number
+  homeworld: number | null
   mass: number | null
 }
 

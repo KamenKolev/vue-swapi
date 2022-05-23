@@ -1,14 +1,10 @@
-<script setup lang="ts">
-import { computed, ref } from "vue"
-import type { Planet } from "../planet/planet.type"
-import GenericTable, { ColumnDefinition } from "../components/GenericTable.vue"
-import type { TableSlotData } from "../components/GenericTable.vue"
-import type { Person } from "../person/person.type"
-import PlanetDialog from "../planet/PlanetDialog.vue"
-import { sortByNumber, sortByString, sortWithSelector } from "../utils/sort"
-import { dateFormatter, numberFormatter } from "../utils/formatting"
+import { dateFormatter, numberFormatter } from "../../utils/formatting"
+import { sortByNumber, sortByString, sortWithSelector } from "../../utils/sort"
 
-const colDefs: ColumnDefinition<Person>[] = [
+import { ColumnDefinition } from "../../components/genericTableTypes"
+import type { Person } from "../../person/person.type"
+
+export const personTableColumns: ColumnDefinition<Person>[] = [
   {
     label: "Name",
     slot: "name",
@@ -87,53 +83,3 @@ const colDefs: ColumnDefinition<Person>[] = [
     },
   },
 ]
-
-const props = defineProps<{
-  people: Person[]
-  planets: Planet[]
-}>()
-
-const planetModalIsOpen = ref(false)
-const clickedPlanetId = ref()
-const modalPlanet = computed(() =>
-  props.planets?.find(({ id }) => id === clickedPlanetId.value),
-)
-function handlePlanetClick(planetId: Person["homeworld"]) {
-  clickedPlanetId.value = planetId
-  planetModalIsOpen.value = true
-}
-</script>
-
-<template>
-  <GenericTable
-    class="personTable"
-    :values="(props.people as any)"
-    :columns="(colDefs as any)"
-    idKey="id"
-  >
-    <template #name="{ item }: TableSlotData<Person>">
-      <span class="font-semibold">{{ item.name }}</span>
-    </template>
-
-    <template #homeworld="{ item }: TableSlotData<Person>">
-      <button
-        v-if="item.homeworld !== null"
-        type="button"
-        @click="handlePlanetClick(item.homeworld)"
-        class="w-full bg-gray-100 px-4 py-2 hover:bg-gray-200 dark:bg-gray-900 hover:dark:bg-banana dark:hover:text-black"
-      >
-        {{ planets?.find(planet => planet.id === item.homeworld)?.name }}
-      </button>
-    </template>
-  </GenericTable>
-
-  <PlanetDialog
-    :open="planetModalIsOpen"
-    :planet="modalPlanet"
-    @close="
-      () => {
-        planetModalIsOpen = false
-      }
-    "
-  />
-</template>
