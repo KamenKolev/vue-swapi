@@ -19,14 +19,31 @@ const planet = computed(() => planets.value?.find(({ id }) => id === props.id))
 <template>
   <Dialog :open="open" @close="() => emit('close')">
     <div class="mb-4 text-xl font-semibold">{{ planet?.name }}</div>
-    <ul>
-      <li class="my-1">Climate: {{ planet?.climate }}</li>
-      <li class="my-1" v-if="planet?.diameter">
-        Diameter: {{ numberFormatter.format(planet.diameter) }} km
-      </li>
-      <li class="my-1" v-if="planet?.population">
-        Population: {{ numberFormatter.format(planet.population) }}
-      </li>
-    </ul>
+    <table>
+      <tr>
+        <th class="py-1 pr-6 text-left font-semibold">Climate</th>
+        <td>{{ planet?.climate ?? "-" }}</td>
+      </tr>
+      <tr>
+        <th class="py-1 pr-6 text-left font-semibold">Diameter (km)</th>
+        <td>
+          {{
+            planet?.diameter
+              ? `${numberFormatter.format(planet.diameter)}`
+              : "-"
+          }}
+        </td>
+      </tr>
+      <tr>
+        <th class="py-1 pr-6 text-left font-semibold">Population</th>
+        <td>
+          {{
+            planet?.population
+              ? `${numberFormatter.format(planet.population)}`
+              : "-"
+          }}
+        </td>
+      </tr>
+    </table>
   </Dialog>
 </template>

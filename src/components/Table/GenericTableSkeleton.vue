@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { ColumnDefinition } from "./genericTableTypes"
-import Skeleton from "./Skeleton.vue"
+import { ColumnDefinition } from "./types"
+import Skeleton from "../Skeleton.vue"
 
 defineProps<{
   columns: ColumnDefinition[]

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { ColumnDefinition } from "./genericTableTypes"
+import type { ColumnDefinition } from "./types"
 
 defineProps<{
   columns: ColumnDefinition[]

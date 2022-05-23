@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, ref, useSlots } from "vue"
-import type { SortingFn } from "../utils/sort"
+import type { SortingFn } from "../../utils/sort"
 import GenericTableHeader from "./GenericTableHeader.vue"
 import GenericTableContent from "./GenericTableContent.vue"
 import GenericTableSkeleton from "./GenericTableSkeleton.vue"
-import { ColumnDefinition, TableSlotData } from "./genericTableTypes"
+import { ColumnDefinition, TableSlotData } from "./types"
 
 export type TableProps<T extends Record<string, unknown> = any> = {
   values?: Array<T>

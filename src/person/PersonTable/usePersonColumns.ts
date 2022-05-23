@@ -1,7 +1,7 @@
 import { computed } from "vue"
 import { dateFormatter, numberFormatter } from "../../utils/formatting"
 import { sortByNumber, sortByString, sortWithSelector } from "../../utils/sort"
-import { ColumnDefinition } from "../../components/genericTableTypes"
+import { ColumnDefinition } from "../../components/Table/types"
 import type { Person } from "../person.type"
 import { planets } from "../../state/planets"
 

@@ -6,8 +6,8 @@ import {
   SortingFn,
   toggleSortingDirection,
   getSortingFunction,
-} from "../utils/sort"
-import { ColumnDefinition } from "./genericTableTypes"
+} from "../../utils/sort"
+import { ColumnDefinition } from "./types"
 
 defineProps<{
   columns: ColumnDefinition[]

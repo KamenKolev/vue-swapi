@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import type { Planet } from "../../planet/planet.type"
-import GenericTable from "../../components/GenericTable.vue"
-import type { TableSlotData } from "../../components/genericTableTypes"
+import GenericTable from "../../components/Table/GenericTable.vue"
+import type { TableSlotData } from "../../components/Table/types"
 import type { Person } from "../../person/person.type"
 import { usePersonColumns } from "./usePersonColumns"
 import ButtonVue from "../../components/Button.vue"

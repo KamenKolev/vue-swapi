@@ -1,5 +1,5 @@
 import { CSSProperties } from "vue"
-import { SortingFn } from "../utils/sort"
+import { SortingFn } from "../../utils/sort"
 
 /**
  * Content can be rendered either through getValue, or using projection(slot)
