@@ -12,7 +12,7 @@ const SKELETON_ROW_NUMBER = 10
   <tr v-for="_ in SKELETON_ROW_NUMBER">
     <td
       v-for="col in columns"
-      :style="{ ...(col.styles ?? {}), height: '72.8px' }"
+      :style="{ ...(col.styles ?? {}), height: '72px' }"
       class="p-4"
     >
       <Skeleton />
