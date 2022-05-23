@@ -22,25 +22,26 @@ const colDefs: ColumnDefinition<Person>[] = [
 	{
 		label: "Height (cm)",
 		getValue: ({ height }) =>
-			height ? String(numberFormatter.format(height)) : "unknown",
+			height ? String(numberFormatter.format(height)) : "",
 		sortingFn: sortWithSelector<Person>(({ height }) => height ?? -Infinity)(
 			sortByNumber,
 		),
 		styles: {
 			minWidth: "140px",
 			maxWidth: "140px",
+			textAlign: "center",
 		},
 	},
 	{
 		label: "Mass (kg)",
-		getValue: ({ mass }) =>
-			mass ? String(numberFormatter.format(mass)) : "unknown",
+		getValue: ({ mass }) => (mass ? String(numberFormatter.format(mass)) : ""),
 		sortingFn: sortWithSelector<Person>(({ mass }) => mass ?? -Infinity)(
 			sortByNumber,
 		),
 		styles: {
 			minWidth: "120px",
 			maxWidth: "120px",
+			textAlign: "center",
 		},
 	},
 	{
@@ -54,6 +55,7 @@ const colDefs: ColumnDefinition<Person>[] = [
 		styles: {
 			minWidth: "160px",
 			maxWidth: "160px",
+			textAlign: "center",
 		},
 	},
 	// TODO check if this really works
@@ -66,6 +68,7 @@ const colDefs: ColumnDefinition<Person>[] = [
 		styles: {
 			minWidth: "160px",
 			maxWidth: "160px",
+			textAlign: "center",
 		},
 	},
 	{
@@ -74,6 +77,7 @@ const colDefs: ColumnDefinition<Person>[] = [
 		styles: {
 			minWidth: "175px",
 			maxWidth: "175px",
+			textAlign: "center",
 		},
 		sortingFn: (a, b) => {
 			const planetAName =
@@ -115,17 +119,14 @@ function handlePlanetClick(planetId: Person["homeworld"]) {
 		</template>
 
 		<template #homeworld="{ item }: TableSlotData<Person>">
-			<span v-if="item.homeworld !== null">
-				<button
-					type="button"
-					@click="handlePlanetClick(item.homeworld)"
-					class="bg-gray-100 px-4 py-2 hover:bg-gray-200 dark:bg-gray-900 dark:hover:bg-gray-800"
-				>
-					{{ planets?.find(planet => planet.id === item.homeworld)?.name }}
-				</button>
-			</span>
-
-			<template v-else>unknown</template>
+			<button
+				v-if="item.homeworld !== null"
+				type="button"
+				@click="handlePlanetClick(item.homeworld)"
+				class="w-full bg-gray-100 px-4 py-2 hover:bg-gray-200 dark:bg-gray-900 hover:dark:bg-banana dark:hover:text-black"
+			>
+				{{ planets?.find(planet => planet.id === item.homeworld)?.name }}
+			</button>
 		</template>
 	</GenericTable>
 

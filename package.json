@@ -4,6 +4,7 @@
 	"version": "0.0.0",
 	"scripts": {
 		"dev": "vite --host",
+		"devProd": "vite --mode production --host",
 		"build": "vue-tsc --noEmit && vite build",
 		"preview": "vite preview --host",
 		"test": "vitest",

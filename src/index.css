@@ -1,33 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+	font-family: Starjedi;
+	src: local("Starjedi"), url(./assets/Starjedi.ttf) format("truetype");
+}
 
 * {
 	box-sizing: border-box;
+	transition: all ease-in-out 0.2s;
 }
 
 /* For Chrome, EDGE, Opera, Others */
 .custom-scrollbar::-webkit-scrollbar {
-	width: 8px;
-	height: 8px;
+	width: 2px;
+	height: 2px;
 }
 
 @media (prefers-color-scheme: dark) {
+	/* iOS top bar -> black */
+	html {
+		background-color: black;
+	}
+
 	.custom-scrollbar::-webkit-scrollbar-track {
-		background: black;
+		@apply bg-black;
+		width: 40px;
 	}
 
 	.custom-scrollbar::-webkit-scrollbar-thumb {
-		background: currentColor;
+		@apply bg-gray-800;
 	}
 }
 
 @media (prefers-color-scheme: light) {
 	.custom-scrollbar::-webkit-scrollbar-track {
-		background: white;
+		@apply bg-white;
 	}
 
 	.custom-scrollbar::-webkit-scrollbar-thumb {
-		background: currentColor;
+		@apply bg-gray-200;
 	}
 }

@@ -85,35 +85,29 @@ const sortedValues = computed(() => {
 	<table
 		class="custom-scrollbar block w-full max-w-max overflow-x-auto whitespace-nowrap"
 	>
-		<thead class="border-b">
+		<thead>
 			<tr>
 				<th
 					v-for="col of columns"
 					@click="() => sortByCol(col)"
 					:style="col.styles ?? {}"
-					class="sticky top-0 z-10 select-none bg-gray-100 p-4 pr-12 text-left font-medium hover:bg-gray-200 dark:bg-gray-900 dark:hover:bg-gray-800"
+					class="dark:hover-bg-gray-800 sticky top-0 z-10 cursor-pointer select-none bg-gray-100 py-4 px-6 text-left font-medium hover:bg-gray-200 dark:bg-gray-900 dark:hover:bg-banana dark:hover:text-black"
 				>
-					<div class="flex items-center">
-						<span>{{ col.label }}</span>
-						<template v-if="sortFn === col.sortingFn">
-							<!-- {{ sortDirection }} -->
-							<SortAscendingIcon
-								v-if="sortDirection === 'ASC'"
-								class="absolute right-3 inline h-5 w-5"
-							/>
-							<SortDescendingIcon
-								v-else-if="sortDirection === 'DESC'"
-								class="absolute right-3 inline h-5 w-5"
-							/>
-						</template>
-					</div>
+					<span>{{ col.label }}</span>
+					<template v-if="sortFn === col.sortingFn">
+						<SortAscendingIcon
+							v-if="sortDirection === 'ASC'"
+							class="absolute right-1 mt-2 inline h-4 w-4"
+						/>
+						<SortDescendingIcon
+							v-else-if="sortDirection === 'DESC'"
+							class="absolute right-1 mt-2 inline h-4 w-4"
+						/>
+					</template>
 				</th>
 			</tr>
 		</thead>
-		<tbody
-			ref="tbodyRef"
-			class="scrollbar scrollbar-thumb-red scrollbar-track-blue"
-		>
+		<tbody ref="tbodyRef">
 			<tr v-if="isSkeleton" v-for="skeleton in skeletonRowNumber">
 				<td
 					v-for="col in columns"
@@ -124,12 +118,7 @@ const sortedValues = computed(() => {
 				</td>
 			</tr>
 
-			<tr
-				v-else
-				v-for="value in sortedValues"
-				:key="value?.[(idKey as any)]"
-				class="border-b"
-			>
+			<tr v-else v-for="value in sortedValues" :key="value?.[(idKey as any)]">
 				<td
 					v-for="col in columns"
 					:style="col.styles"
@@ -140,10 +129,8 @@ const sortedValues = computed(() => {
 					"
 					class="p-4"
 				>
-					<span class="inline-block">
-						{{ col.getValue?.(value) }}
-						<slot v-if="col && col.slot" :name="col.slot" :item="value"> </slot>
-					</span>
+					{{ col.getValue?.(value) }}
+					<slot v-if="col && col.slot" :name="col.slot" :item="value"> </slot>
 				</td>
 			</tr>
 		</tbody>
