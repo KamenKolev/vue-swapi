@@ -9,8 +9,8 @@ import ButtonVue from "../../components/Button.vue"
 import PlanetDialog from "../../planet/PlanetDialog.vue"
 
 const props = defineProps<{
-  people: Person[]
-  planets: Planet[]
+  people: Person[] | undefined
+  planets: Planet[] | undefined
 }>()
 
 const columns = usePersonColumns()
@@ -29,7 +29,7 @@ const selectedPlanetID = ref<Person["homeworld"]>()
         :id="item.homeworld"
         @click.native="selectedPlanetID = item.homeworld"
       >
-        {{ planets.find(planet => planet.id === item.homeworld)?.name }}
+        {{ planets?.find(planet => planet.id === item.homeworld)?.name }}
       </ButtonVue>
 
       <template v-else>-</template>

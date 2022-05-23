@@ -10,9 +10,13 @@ import { theme } from "./state/theme"
 
 const searchString = ref("")
 const filteredPeople = computed(() =>
-  people.value?.filter(person =>
-    person.name.toLowerCase().includes(searchString.value.trim().toLowerCase()),
-  ),
+  people.value
+    ? people.value.filter(person =>
+        person.name
+          .toLowerCase()
+          .includes(searchString.value.trim().toLowerCase()),
+      )
+    : undefined,
 )
 </script>
 
@@ -30,12 +34,12 @@ const filteredPeople = computed(() =>
         <SearchBox
           class="h-12"
           v-model="searchString"
-          placeholder="Fitler by name"
+          placeholder="Filter by name"
         />
         <ThemeToggle />
       </span>
 
-      <PersonTable :planets="planets ?? []" :people="filteredPeople ?? []" />
+      <PersonTable :planets="planets" :people="filteredPeople" />
     </main>
   </div>
 </template>
