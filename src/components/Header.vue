@@ -2,7 +2,7 @@
   <header
     class="p-4 text-center text-4xl font-semibold dark:bg-black dark:text-white"
   >
-    <h1 class="pointer-events-none">Star Wars</h1>
+    <h1 class="select-none">Star Wars</h1>
   </header>
 </template>
 

@@ -1,31 +1,19 @@
-/* For Chrome, EDGE, Opera, Others */
 .custom-scrollbar::-webkit-scrollbar {
-	width: 2px;
-	height: 2px;
+  width: 4px;
+  height: 4px;
 }
 
 @media (prefers-color-scheme: dark) {
-	/* iOS top bar -> black */
-	html {
-		background-color: black;
-	}
-
-	.custom-scrollbar::-webkit-scrollbar-track {
-		@apply bg-black;
-		width: 40px;
-	}
-
-	.custom-scrollbar::-webkit-scrollbar-thumb {
-		@apply bg-gray-800;
-	}
+  /* iOS top bar -> black */
+  html {
+    background-color: black;
+  }
 }
 
-@media (prefers-color-scheme: light) {
-	.custom-scrollbar::-webkit-scrollbar-track {
-		@apply bg-white;
-	}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: inherit;
+}
 
-	.custom-scrollbar::-webkit-scrollbar-thumb {
-		@apply bg-gray-200;
-	}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #4b5563;
 }

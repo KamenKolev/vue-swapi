@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, useSlots } from "vue"
+import { computed, ref, useSlots, watch } from "vue"
 import type { SortingFn } from "../../utils/sort"
 import GenericTableHeader from "./GenericTableHeader.vue"
 import GenericTableContent from "./GenericTableContent.vue"
@@ -16,8 +16,9 @@ const isLoading = computed(() => props.values === undefined)
 
 const tbodyRef = ref<HTMLTableSectionElement | null>(null)
 function scrollToTop() {
-  if (tbodyRef.value) {
-    tbodyRef.value.rows[0].scrollIntoView({
+  const firstRow = tbodyRef.value?.rows?.[0]
+  if (firstRow) {
+    firstRow.scrollIntoView({
       behavior: "smooth",
       block: "end",
     })
@@ -36,6 +37,8 @@ function handleSort(fn: SortingFn) {
 const zeroResults = computed(
   () => Array.isArray(props.values) && props.values.length === 0,
 )
+
+watch(() => props.values, scrollToTop)
 
 const slots = useSlots()
 </script>

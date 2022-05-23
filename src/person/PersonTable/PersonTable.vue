@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { effect, ref } from "vue"
 import type { Planet } from "../../planet/planet.type"
 import GenericTable from "../../components/Table/GenericTable.vue"
 import type { TableSlotData } from "../../components/Table/types"
