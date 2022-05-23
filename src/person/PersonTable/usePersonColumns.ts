@@ -2,9 +2,11 @@ import { dateFormatter, numberFormatter } from "../../utils/formatting"
 import { sortByNumber, sortByString, sortWithSelector } from "../../utils/sort"
 
 import { ColumnDefinition } from "../../components/genericTableTypes"
-import type { Person } from "../../person/person.type"
+import type { Person } from "../person.type"
+import { planets } from "../../state/planets"
+import { computed } from "vue"
 
-export const personTableColumns: ColumnDefinition<Person>[] = [
+const personTableColumns: ColumnDefinition<Person>[] = [
   {
     label: "Name",
     slot: "name",
@@ -65,21 +67,28 @@ export const personTableColumns: ColumnDefinition<Person>[] = [
       textAlign: "center",
     },
   },
-  {
-    slot: "homeworld",
-    label: "Planet",
-    styles: {
-      minWidth: "175px",
-      maxWidth: "175px",
-      textAlign: "center",
-    },
-    sortingFn: (a, b) => {
-      const planetAName =
-        props.planets.find(planet => planet.id === a.homeworld)?.name ?? ""
-      const planetBName =
-        props.planets.find(planet => planet.id === b.homeworld)?.name ?? ""
-
-      return sortByString(planetAName, planetBName)
-    },
-  },
 ]
+
+export const usePersonColumns = () => {
+  return computed(() =>
+    personTableColumns.concat({
+      slot: "homeworld",
+      label: "Planet",
+      styles: {
+        minWidth: "175px",
+        maxWidth: "175px",
+        textAlign: "center",
+      },
+      sortingFn: (a, b) => {
+        const planetAName =
+          (planets.value ?? []).find(planet => planet.id === a.homeworld)
+            ?.name ?? ""
+        const planetBName =
+          (planets.value ?? []).find(planet => planet.id === b.homeworld)
+            ?.name ?? ""
+
+        return sortByString(planetAName, planetBName)
+      },
+    }),
+  )
+}
