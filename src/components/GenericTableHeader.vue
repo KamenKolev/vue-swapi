@@ -19,7 +19,6 @@ const emit = defineEmits<{
 
 const sortDirection = ref<SortingDirection>(null)
 const sortFn = ref<SortingFn>(() => 0)
-const finalSortingFn = ref<SortingFn>(() => 0)
 
 function handleSort(col: ColumnDefinition) {
   if (sortFn.value === col.sortingFn) {

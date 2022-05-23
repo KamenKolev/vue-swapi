@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue"
+import { ref } from "vue"
 import type { Planet } from "../../planet/planet.type"
 import GenericTable from "../../components/GenericTable.vue"
 import type { TableSlotData } from "../../components/genericTableTypes"
@@ -18,11 +18,7 @@ const selectedPlanetID = ref<Person["homeworld"]>()
 </script>
 
 <template>
-  <GenericTable
-    class="personTable"
-    :values="(props.people as any)"
-    :columns="columns"
-  >
+  <GenericTable class="personTable" :values="props.people" :columns="columns">
     <template #name="{ item }: TableSlotData<Person>">
       <span class="font-semibold">{{ item.name }}</span>
     </template>

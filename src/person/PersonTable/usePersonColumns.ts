@@ -1,10 +1,9 @@
+import { computed } from "vue"
 import { dateFormatter, numberFormatter } from "../../utils/formatting"
 import { sortByNumber, sortByString, sortWithSelector } from "../../utils/sort"
-
 import { ColumnDefinition } from "../../components/genericTableTypes"
 import type { Person } from "../person.type"
 import { planets } from "../../state/planets"
-import { computed } from "vue"
 
 const personTableColumns: ColumnDefinition<Person>[] = [
   {
