@@ -3,7 +3,6 @@ import { Planet } from "./planet.type"
 
 type PlanetDTO = Planet
 
-// TODO utilize env
 const fetchAllPlanets = (): Promise<PlanetDTO[]> =>
 	fetch(`${import.meta.env.VITE_API_URL}planets`).then(res => res.json())
 

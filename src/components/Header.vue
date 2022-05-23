@@ -14,7 +14,6 @@ h1 {
 
 @media (prefers-color-scheme: dark) {
 	h1 {
-		-webkit-text-stroke-width: 1px;
 		-webkit-text-stroke: 1px #ffe81f;
 		-webkit-text-fill-color: black;
 	}
@@ -23,7 +22,6 @@ h1 {
 @media (prefers-color-scheme: light) {
 	h1 {
 		-webkit-text-stroke: 1px black;
-		-webkit-text-stroke-width: 1px;
 		-webkit-text-fill-color: #ffe81f;
 	}
 }

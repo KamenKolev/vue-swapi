@@ -11,7 +11,6 @@ import { dateFormatter, numberFormatter } from "../utils/formatting"
 const colDefs: ColumnDefinition<Person>[] = [
 	{
 		label: "Name",
-		// getValue: ({ name }) => name,
 		slot: "name",
 		sortingFn: sortWithSelector<Person>(({ name }) => name)(sortByString),
 		styles: {
@@ -58,7 +57,6 @@ const colDefs: ColumnDefinition<Person>[] = [
 			textAlign: "center",
 		},
 	},
-	// TODO check if this really works
 	{
 		label: "Edited",
 		getValue: ({ edited }) => dateFormatter.format(new Date(edited)),
@@ -98,7 +96,6 @@ const props = defineProps<{
 const planetModalIsOpen = ref(false)
 const clickedPlanetId = ref()
 const modalPlanet = computed(() =>
-	// TODO fetch effect
 	props.planets?.find(({ id }) => id === clickedPlanetId.value),
 )
 function handlePlanetClick(planetId: Person["homeworld"]) {

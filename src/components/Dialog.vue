@@ -18,6 +18,7 @@ onKeyDown(
 	() => emit("close"),
 )
 
+/* Backdrop is only displayed when dialog is opened with dialog.showModal() */
 effect(() => {
 	if (dialogElement?.value) {
 		if (props.open) {
@@ -51,7 +52,6 @@ effect(() => {
 </template>
 
 <style scoped>
-/* Backdrop is only displayed when dialog is opened with dialog.showModal() */
 dialog::backdrop {
 	height: 100vh;
 	width: 100vw;

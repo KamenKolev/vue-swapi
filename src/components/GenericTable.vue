@@ -31,8 +31,6 @@ export type TableSlotData<T> = {
 	item: T
 }
 
-// TODO compute columns and their size via intersection observer
-
 /**
  * Use this in order to properly type the component
  */

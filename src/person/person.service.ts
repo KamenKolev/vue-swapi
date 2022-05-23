@@ -26,7 +26,6 @@ const personFromDTO = (dto: PersonDTO): Person =>
 		edited: new Date(dto.edited),
 	})
 
-// TODO utilize env
 const fetchAllPeople = (): Promise<Person[]> =>
 	fetch(`${import.meta.env.VITE_API_URL}people`)
 		.then(res => res.json())

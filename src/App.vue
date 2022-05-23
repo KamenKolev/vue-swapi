@@ -5,12 +5,7 @@ import type { Planet } from "./planet/planet.type"
 import { getAllPeople } from "./person/person.service"
 import type { Person } from "./person/person.type"
 import PersonTable from "./person/PersonTable.vue"
-import {
-	SearchCircleIcon,
-	SearchIcon,
-	DocumentSearchIcon,
-	FilterIcon,
-} from "@heroicons/vue/solid"
+import { FilterIcon } from "@heroicons/vue/solid"
 import Header from "./components/Header.vue"
 
 const planets = ref<undefined | Planet[]>(undefined)

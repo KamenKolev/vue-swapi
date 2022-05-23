@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@headlessui/vue': ^1.6.1
   '@heroicons/vue': ^1.0.6
   '@types/prettier': ^2.6.1
   '@vitejs/plugin-vue': ^2.3.3
@@ -22,7 +21,6 @@ specifiers:
   vue-tsc: ^0.34.7
 
 dependencies:
-  '@headlessui/vue': 1.6.1_vue@3.2.33
   '@heroicons/vue': 1.0.6_vue@3.2.33
   '@vueuse/core': 8.5.0_vue@3.2.33
   ts-toolbelt: 9.6.0
@@ -63,15 +61,6 @@ packages:
     dependencies:
       '@babel/helper-validator-identifier': 7.16.7
       to-fast-properties: 2.0.0
-
-  /@headlessui/vue/1.6.1_vue@3.2.33:
-    resolution: {integrity: sha512-fccGN1hsFvS0P73NplZoOdX1rhyaH5jIQE9IUKNaaJC72mQjR3lVvZldo+iiLF5X1bqgl6pDixWdqS2kMGfFxA==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      vue: ^3.2.0
-    dependencies:
-      vue: 3.2.33
-    dev: false
 
   /@heroicons/vue/1.0.6_vue@3.2.33:
     resolution: {integrity: sha512-ng2YcCQrdoQWEFpw+ipFl2rZo8mZ56v0T5+MyfQQvNqfKChwgP6DMloZLW+rl17GEcHkE3H82UTAMKBKZr4+WA==}
