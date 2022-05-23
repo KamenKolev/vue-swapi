@@ -1,6 +1,6 @@
 <template>
   <header
-    class="p-4 text-center text-5xl font-semibold dark:bg-black dark:text-white"
+    class="p-4 text-center text-4xl font-semibold dark:bg-black dark:text-white"
   >
     <h1 class="pointer-events-none">Star Wars</h1>
   </header>
