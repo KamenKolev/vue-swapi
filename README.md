@@ -1,4 +1,3 @@
 # Star wars characters
 
-A Vue application utilizing a custom API Star Wars API
-Shows data about characters and their home worlds
+A Vue 3 application that shows Star Wars characters and their home worlds
