@@ -18,7 +18,7 @@ const personTableColumns: ColumnDefinition<Person>[] = [
   {
     label: "Height (cm)",
     getValue: ({ height }) =>
-      height ? String(numberFormatter.format(height)) : "",
+      height ? String(numberFormatter.format(height)) : "-",
     sortingFn: sortWithSelector<Person>(({ height }) => height ?? -Infinity)(
       sortByNumber,
     ),
@@ -30,7 +30,7 @@ const personTableColumns: ColumnDefinition<Person>[] = [
   },
   {
     label: "Mass (kg)",
-    getValue: ({ mass }) => (mass ? String(numberFormatter.format(mass)) : ""),
+    getValue: ({ mass }) => (mass ? String(numberFormatter.format(mass)) : "-"),
     sortingFn: sortWithSelector<Person>(({ mass }) => mass ?? -Infinity)(
       sortByNumber,
     ),

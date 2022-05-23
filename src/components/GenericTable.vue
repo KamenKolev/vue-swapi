@@ -33,6 +33,10 @@ function handleSort(fn: SortingFn) {
   scrollToTop()
 }
 
+const zeroResults = computed(
+  () => Array.isArray(props.values) && props.values.length === 0,
+)
+
 const slots = useSlots()
 </script>
 
@@ -41,8 +45,11 @@ const slots = useSlots()
     class="custom-scrollbar block w-full max-w-max overflow-x-auto whitespace-nowrap"
   >
     <GenericTableHeader :columns="columns" @sort="handleSort" />
-    <tbody ref="tbodyRef">
+    <tbody ref="tbodyRef" :class="zeroResults ? 'flex' : ''">
       <GenericTableSkeleton v-if="isLoading" :columns="columns" />
+      <div v-else-if="zeroResults" class="w-full py-16 text-center text-2xl">
+        No results
+      </div>
       <GenericTableContent
         v-else
         :columns="columns"

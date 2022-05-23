@@ -31,6 +31,8 @@ const selectedPlanetID = ref<Person["homeworld"]>()
       >
         {{ planets.find(planet => planet.id === item.homeworld)?.name }}
       </ButtonVue>
+
+      <template v-else>-</template>
     </template>
   </GenericTable>
 
