@@ -8,18 +8,18 @@ vi.stubGlobal("localStorage", new MockStorage())
 import { getAllPlanets } from "./planet.service"
 
 const planetSchema = object({
-	id: number(),
-	name: string(),
-	diameter: nullable(number()),
-	climate: string(),
-	population: nullable(number()),
+  id: number(),
+  name: string(),
+  diameter: nullable(number()),
+  climate: string(),
+  population: nullable(number()),
 })
 
 // NOTE: API is not currently mocked. neither is fetch
 test("PlanetsService returns a non-empty list of the correct type", async () => {
-	const planets = await getAllPlanets()
+  const planets = await getAllPlanets()
 
-	expect(planets).toBeInstanceOf(Array)
-	expect(planets.length).toBeGreaterThan(0)
-	planets.forEach(planet => assert(planet, planetSchema))
+  expect(planets).toBeInstanceOf(Array)
+  expect(planets.length).toBeGreaterThan(0)
+  planets.forEach(planet => assert(planet, planetSchema))
 })
