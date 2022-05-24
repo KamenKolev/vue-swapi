@@ -41,7 +41,7 @@ effect(() => {
       <button
         type="button"
         @click="() => emit('close')"
-        class="absolute right-4 top-4 hover:text-banana"
+        class="absolute right-4 top-4 text-gray-600 hover:text-black dark:text-white dark:hover:text-banana"
       >
         <XIcon class="h-6 w-6" />
       </button>
