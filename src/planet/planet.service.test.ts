@@ -11,7 +11,7 @@ const planetSchema = object({
   id: number(),
   name: string(),
   diameter: nullable(number()),
-  climate: string(),
+  climate: nullable(string()),
   population: nullable(number()),
 })
 

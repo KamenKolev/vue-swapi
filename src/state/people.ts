@@ -4,4 +4,6 @@ import { ref } from "vue"
 
 export const people = ref<undefined | Person[]>(undefined)
 
-getAllPeople().then(res => (people.value = res))
+getAllPeople()
+  .then(res => (people.value = res))
+  .catch(() => (people.value = []))

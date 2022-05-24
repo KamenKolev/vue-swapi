@@ -2,11 +2,10 @@ import { assert, date, nullable, number, object, string } from "superstruct"
 import { expect, test, vi } from "vitest"
 
 // polyfills
+import { MockStorage } from "../utils/cache.test"
 import "cross-fetch/polyfill"
 vi.stubGlobal("localStorage", new MockStorage())
-import "cross-fetch/polyfill"
 import { getAllPeople } from "./person.service"
-import { MockStorage } from "../utils/cache.test"
 
 const personSchema = object({
   id: number(),

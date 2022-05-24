@@ -1,7 +1,5 @@
 <template>
-  <header
-    class="p-4 text-center text-4xl font-semibold dark:bg-black dark:text-white"
-  >
+  <header class="bg-black p-4 text-center text-4xl font-semibold text-black">
     <h1 class="select-none">Star Wars</h1>
   </header>
 </template>
@@ -10,19 +8,6 @@
 h1 {
   white-space: nowrap;
   font-family: "Starjedi";
-}
-
-@media (prefers-color-scheme: dark) {
-  h1 {
-    -webkit-text-stroke: 1px #ffe81f;
-    -webkit-text-fill-color: black;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  h1 {
-    -webkit-text-stroke: 1px black;
-    -webkit-text-fill-color: #ffe81f;
-  }
+  -webkit-text-stroke: 1px #ffe81f;
 }
 </style>
