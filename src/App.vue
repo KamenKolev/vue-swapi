@@ -7,6 +7,7 @@ import { people } from "./state/people"
 import { planets } from "./state/planets"
 import ThemeToggle from "./components/ThemeToggle.vue"
 import { theme } from "./state/theme"
+import Footer from "./components/Footer.vue"
 
 const searchString = ref("")
 const filteredPeople = computed(() =>
@@ -28,7 +29,7 @@ const filteredPeople = computed(() =>
   >
     <Header class="h-20" />
     <main
-      class="relative flex h-screen w-screen flex-col items-center justify-items-center gap-4 overflow-hidden bg-white py-4 pb-16 text-black dark:bg-black dark:text-white md:px-4"
+      class="relative flex h-screen w-screen flex-col items-center justify-items-center gap-4 overflow-hidden bg-white py-4 text-black dark:bg-black dark:text-white md:px-4"
     >
       <span class="flex">
         <SearchBox
@@ -41,11 +42,13 @@ const filteredPeople = computed(() =>
 
       <PersonTable :planets="planets" :people="filteredPeople" />
     </main>
+
+    <Footer />
   </div>
 </template>
 
 <style scoped>
 main {
-  height: calc(100vh - 80px);
+  height: calc(100vh - 9rem);
 }
 </style>
