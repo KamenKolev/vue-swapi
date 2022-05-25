@@ -1,4 +1,3 @@
-<script lang="ts" setup></script>
 <template>
   <div class="flex justify-center bg-black p-4">
     <a href="https://github.com/KamenKolev/vue-swapi">
