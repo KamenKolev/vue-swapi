@@ -1,6 +1,6 @@
 <script lang="ts" setup></script>
 <template>
-  <div class="flex justify-center p-4">
+  <div class="flex justify-center bg-black p-4">
     <a href="https://github.com/KamenKolev/vue-swapi">
       <img class="h-8 w-8 invert" src="../assets/github_icon.svg" />
     </a>
